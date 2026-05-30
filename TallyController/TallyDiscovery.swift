@@ -14,18 +14,23 @@ class TallyDiscovery: NSObject, ObservableObject {
     private var pending: [NetService] = []  // retain until resolved
 
     func startScan() {
-        DispatchQueue.main.async {
-            self.discovered.removeAll()
-            self.pending.removeAll()
-            self.isScanning = true
-        }
+        // Always recreate the browser — reusing a stopped browser is unreliable
+        browser.stop()
+        browser.delegate = nil
+        browser = NetServiceBrowser()
+        browser.schedule(in: .main, forMode: .default)
         browser.delegate = self
+
+        discovered.removeAll()
+        pending.removeAll()
+        isScanning = true
+
         browser.searchForServices(ofType: "_tally._tcp.", inDomain: "local.")
     }
 
     func stopScan() {
         browser.stop()
-        DispatchQueue.main.async { self.isScanning = false }
+        isScanning = false
     }
 }
 
