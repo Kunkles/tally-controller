@@ -21,5 +21,12 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Tally Controller needs local network access to discover and communicate with tally bridge devices.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_tally._tcp</string>
+		<string>_http._tcp</string>
+	</array>
 </dict>
 </plist>

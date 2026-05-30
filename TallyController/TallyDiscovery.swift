@@ -9,6 +9,7 @@ struct DiscoveredUnit: Identifiable {
 class TallyDiscovery: NSObject, ObservableObject {
     @Published var discovered: [DiscoveredUnit] = []
     @Published var isScanning = false
+    @Published var errorMessage: String? = nil
 
     private var browser  = NetServiceBrowser()
     private var pending: [NetService] = []  // retain until resolved
@@ -23,6 +24,7 @@ class TallyDiscovery: NSObject, ObservableObject {
 
         discovered.removeAll()
         pending.removeAll()
+        errorMessage = nil
         isScanning = true
 
         browser.searchForServices(ofType: "_tally._tcp", inDomain: "")
@@ -45,7 +47,11 @@ extension TallyDiscovery: NetServiceBrowserDelegate {
 
     func netServiceBrowser(_ browser: NetServiceBrowser,
                            didNotSearch errorDict: [String: NSNumber]) {
-        DispatchQueue.main.async { self.isScanning = false }
+        let code = errorDict[NetService.errorCode]?.intValue ?? -1
+        DispatchQueue.main.async {
+            self.isScanning = false
+            self.errorMessage = "Scan failed (error \(code)) — check network permissions."
+        }
     }
 }
 

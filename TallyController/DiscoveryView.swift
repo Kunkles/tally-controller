@@ -52,11 +52,19 @@ struct DiscoveryView: View {
                     .foregroundColor(.secondary)
                 Text("No tally units found")
                     .font(.headline)
-                Text("Make sure units are powered on and on the same network.")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
+                if let err = discovery.errorMessage {
+                    Text(err)
+                        .font(.caption)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                } else {
+                    Text("Make sure units are powered on and on the same network.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
