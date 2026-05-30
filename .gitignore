@@ -16,8 +16,9 @@
 build/
 DerivedData/
 
-# Compiled app bundles
+# Compiled app bundles (except versioned releases)
 *.app
+!TallyController v*/*.app
 *.ipa
 *.dSYM.zip
 *.dSYM
