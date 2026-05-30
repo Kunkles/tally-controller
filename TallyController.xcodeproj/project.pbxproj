@@ -16,6 +16,8 @@
 		83CBBA101A601CBA00E9C79F /* AddTallyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBBA071A601CBA00E9C79F /* AddTallyView.swift */; };
 		83CBBA111A601CBA00E9C79F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83CBBA081A601CBA00E9C79F /* Assets.xcassets */; };
 		83CBBA1C1A601CBA00E9C79F /* AddressHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBBA1D1A601CBA00E9C79F /* AddressHelper.swift */; };
+		83CBBA1E1A601CBA00E9C79F /* TallyDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBBA1F1A601CBA00E9C79F /* TallyDiscovery.swift */; };
+		83CBBA201A601CBA00E9C79F /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CBBA211A601CBA00E9C79F /* DiscoveryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		83CBBA081A601CBA00E9C79F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83CBBA091A601CBA00E9C79F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83CBBA1D1A601CBA00E9C79F /* AddressHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressHelper.swift; sourceTree = "<group>"; };
+		83CBBA1F1A601CBA00E9C79F /* TallyDiscovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallyDiscovery.swift; sourceTree = "<group>"; };
+		83CBBA211A601CBA00E9C79F /* DiscoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
 		83CBBA1B1A601CBA00E9C79F /* TallyController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TallyController.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +75,8 @@
 				83CBBA061A601CBA00E9C79F /* TallyButtonStyle.swift */,
 				83CBBA071A601CBA00E9C79F /* AddTallyView.swift */,
 				83CBBA1D1A601CBA00E9C79F /* AddressHelper.swift */,
+				83CBBA1F1A601CBA00E9C79F /* TallyDiscovery.swift */,
+				83CBBA211A601CBA00E9C79F /* DiscoveryView.swift */,
 				83CBBA081A601CBA00E9C79F /* Assets.xcassets */,
 				83CBBA091A601CBA00E9C79F /* Info.plist */,
 				83CBBA1B1A601CBA00E9C79F /* TallyController.entitlements */,
@@ -155,6 +161,8 @@
 				83CBBA0F1A601CBA00E9C79F /* TallyButtonStyle.swift in Sources */,
 				83CBBA101A601CBA00E9C79F /* AddTallyView.swift in Sources */,
 				83CBBA1C1A601CBA00E9C79F /* AddressHelper.swift in Sources */,
+				83CBBA1E1A601CBA00E9C79F /* TallyDiscovery.swift in Sources */,
+				83CBBA201A601CBA00E9C79F /* DiscoveryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,9 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var store = TallyStore()
-    @State private var showingAddTally = false
-    @State private var editMode        = false
-    @State private var selectedIDs     = Set<UUID>()
+    @State private var showingAddTally    = false
+    @State private var showingDiscovery   = false
+    @State private var editMode           = false
+    @State private var selectedIDs        = Set<UUID>()
 
     var body: some View {
         NavigationStack {
@@ -86,13 +87,23 @@ struct ContentView: View {
                     }
                 }
 
-                // Add button (normal mode only)
+                // Discover + Add buttons (normal mode only)
                 ToolbarItem(placement: .primaryAction) {
                     if !editMode {
-                        Button {
-                            showingAddTally = true
-                        } label: {
-                            Image(systemName: "plus")
+                        HStack {
+                            Button {
+                                showingDiscovery = true
+                            } label: {
+                                Image(systemName: "antenna.radiowaves.left.and.right")
+                            }
+                            .help("Discover tally units on the network")
+
+                            Button {
+                                showingAddTally = true
+                            } label: {
+                                Image(systemName: "plus")
+                            }
+                            .help("Add unit manually")
                         }
                     }
                 }
@@ -111,6 +122,13 @@ struct ContentView: View {
             .sheet(isPresented: $showingAddTally) {
                 AddTallyView { name, ip in
                     store.addUnit(name: name, ipAddress: ip)
+                }
+            }
+            .sheet(isPresented: $showingDiscovery) {
+                DiscoveryView(
+                    existingHosts: Set(store.units.map { $0.ipAddress })
+                ) { name, host in
+                    store.addUnit(name: name, ipAddress: host)
                 }
             }
         }
