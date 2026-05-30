@@ -25,7 +25,7 @@ class TallyDiscovery: NSObject, ObservableObject {
         pending.removeAll()
         isScanning = true
 
-        browser.searchForServices(ofType: "_tally._tcp", inDomain: "local.")
+        browser.searchForServices(ofType: "_tally._tcp", inDomain: "")
     }
 
     func stopScan() {
