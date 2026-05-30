@@ -32,16 +32,11 @@ struct TallyRow: View {
 
             // Name + IP
             VStack(alignment: .leading, spacing: 4) {
-                if editMode {
-                    TextField("Name", text: $editedName)
-                        .font(.headline)
-                        .textFieldStyle(.roundedBorder)
-                        .onSubmit { saveChanges() }
-                        .onChange(of: editedName) { _ in saveChanges() }
-                } else {
-                    Text(unit.name)
-                        .font(.headline)
-                }
+                TextField("Name", text: $editedName)
+                    .font(.headline)
+                    .textFieldStyle(.roundedBorder)
+                    .onSubmit { saveChanges() }
+                    .onChange(of: editedName) { _ in saveChanges() }
 
                 TextField("IP or hostname", text: $editedIP)
                     .font(.caption)
