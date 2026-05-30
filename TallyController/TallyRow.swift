@@ -33,30 +33,35 @@ struct TallyRow: View {
 
             // Name + IP
             VStack(alignment: .leading, spacing: 4) {
-                TextField("Name", text: $editedName)
-                    .font(.headline)
-                    .textFieldStyle(.roundedBorder)
-                    .onSubmit { saveChanges() }
-                    .onChange(of: editedName) { _ in saveChanges() }
+                LabeledContent("Name") {
+                    TextField("e.g. Camera 1", text: $editedName)
+                        .textFieldStyle(.roundedBorder)
+                        .onSubmit { saveChanges() }
+                        .onChange(of: editedName) { _ in saveChanges() }
+                }
+                .font(.headline)
 
-                TextField("IP or hostname", text: $editedIP)
-                    .font(.caption)
-                    .textFieldStyle(.roundedBorder)
-                    .autocorrectionDisabled()
-                    .focused($ipFocused)
-                    .onSubmit {
-                        editedIP = sanitizeAddress(editedIP)
-                        saveChanges()
-                    }
-                    .onChange(of: ipFocused) { focused in
-                        if !focused {
-                            let cleaned = sanitizeAddress(editedIP)
-                            if cleaned != editedIP {
-                                editedIP = cleaned
-                                saveChanges()
+                LabeledContent("Address") {
+                    TextField("e.g. tally-cam1.local", text: $editedIP)
+                        .textFieldStyle(.roundedBorder)
+                        .autocorrectionDisabled()
+                        .focused($ipFocused)
+                        .onSubmit {
+                            editedIP = sanitizeAddress(editedIP)
+                            saveChanges()
+                        }
+                        .onChange(of: ipFocused) { focused in
+                            if !focused {
+                                let cleaned = sanitizeAddress(editedIP)
+                                if cleaned != editedIP {
+                                    editedIP = cleaned
+                                    saveChanges()
+                                }
                             }
                         }
-                    }
+                }
+                .font(.caption)
+                .foregroundColor(.secondary)
             }
 
             Spacer()
