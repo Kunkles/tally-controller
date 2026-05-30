@@ -11,6 +11,7 @@ struct TallyRow: View {
 
     @State private var editedName: String = ""
     @State private var editedIP: String   = ""
+    @FocusState private var ipFocused: Bool
 
     var body: some View {
         HStack(spacing: 12) {
@@ -41,8 +42,21 @@ struct TallyRow: View {
                 TextField("IP or hostname", text: $editedIP)
                     .font(.caption)
                     .textFieldStyle(.roundedBorder)
-                    .onSubmit { saveChanges() }
-                    .onChange(of: editedIP) { _ in saveChanges() }
+                    .autocorrectionDisabled()
+                    .focused($ipFocused)
+                    .onSubmit {
+                        editedIP = sanitizeAddress(editedIP)
+                        saveChanges()
+                    }
+                    .onChange(of: ipFocused) { focused in
+                        if !focused {
+                            let cleaned = sanitizeAddress(editedIP)
+                            if cleaned != editedIP {
+                                editedIP = cleaned
+                                saveChanges()
+                            }
+                        }
+                    }
             }
 
             Spacer()
@@ -73,7 +87,7 @@ struct TallyRow: View {
     }
 
     private func saveChanges() {
-        var updated      = unit
+        var updated       = unit
         updated.name      = editedName
         updated.ipAddress = editedIP
         onUpdate(updated)

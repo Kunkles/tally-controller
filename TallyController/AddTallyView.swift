@@ -7,17 +7,27 @@ struct AddTallyView: View {
 
     let onAdd: (String, String) -> Void
 
-    var isValid: Bool { !name.isEmpty && !ipAddress.isEmpty }
+    var sanitized: String { sanitizeAddress(ipAddress) }
+    var showPreview: Bool  { !ipAddress.isEmpty && sanitized != ipAddress }
+    var isValid: Bool      { !name.isEmpty && !ipAddress.isEmpty }
 
     var body: some View {
         NavigationStack {
             Form {
                 Section {
                     TextField("Name  (e.g. Camera 1)", text: $name)
-                    TextField("IP Address or hostname", text: $ipAddress)
+                    TextField("IP address or hostname", text: $ipAddress)
                         .autocorrectionDisabled()
                 } footer: {
-                    Text("Enter the IP address shown on the device's status page, or its .local hostname (e.g. tally-cam1.local).")
+                    if showPreview {
+                        // Show what the address will be cleaned to
+                        Label("Will be saved as: \(sanitized)", systemImage: "wand.and.stars")
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
+                    } else {
+                        Text("Enter an IP address or hostname. Paste a full URL and it will be cleaned up automatically.")
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .navigationTitle("Add Tally")
@@ -27,7 +37,7 @@ struct AddTallyView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Add") {
-                        onAdd(name, ipAddress)
+                        onAdd(name, sanitized)
                         dismiss()
                     }
                     .disabled(!isValid)
